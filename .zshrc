@@ -175,8 +175,6 @@ else # not SSH
     RPROMPT=$'%(?,${vcs_info_msg_0_} %F{blue}%n%f,%F{red}%Bfailed%b%f)'
 fi
 
-source /home/hp/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # VSCode
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 

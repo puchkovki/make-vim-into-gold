@@ -140,6 +140,6 @@ vmap <F2> <esc>:w<CR>v
 imap <F2> <esc>:w<CR>i
 
 " --NERDTREE--
-" Show the folder tree
+" Show the folder tree: ctrl + N
 nmap <C-N> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
