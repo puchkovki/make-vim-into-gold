@@ -2,7 +2,7 @@
 
 - Install zsh and python packages. In case of an error try `sudo apt update -y; sudo apt upgrade -y `.
 ```
-$ sudo apt install zsh python
+$ sudo apt install zsh python git curl
 ```
 - Install [Oh-my-zsh](https://ohmyz.sh/).
 ```

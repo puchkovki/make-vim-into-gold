@@ -179,3 +179,6 @@ fi
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
+
+# Shortcuts for the Quotation marks and dash in Linux
+# setxkbmap -option lv3:ralt_switch,nbsp:level3n,misc:typo,altwin:left_meta_win
