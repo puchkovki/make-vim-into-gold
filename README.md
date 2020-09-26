@@ -40,3 +40,19 @@ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 $ vim +PluginInstall +qall
 ```
 After all tranformations reboot your device.
+
+# Firacode and ligatures in VS Code
+
+Also really comfortable to use `Fira Code` as Font weight and add ligatures as [here](https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions).
+
+In Linux Ubuntu:
+- Install `Fira Code`
+```
+$ sudo apt install fonts-firacode
+```
+- Add new font weight and ligatures to the VS Code. Press `Shift+Ctrl+P` and input `settings.json`. Replace the row with `font weight` by
+```
+"editor.fontFamily": "Fira Code",
+"editor.fontLigatures": true,
+```
+- Reload your VS Code.
