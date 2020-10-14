@@ -121,6 +121,11 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 alias l.="ls -d .*"
 alias cd..='cd ..'
+alias t=tmux
+
+# support of all python and pip versions
+alias python=python3
+alias pip=pip3
 
 alias now='date +"%T"'
 alias nowtime=now

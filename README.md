@@ -1,8 +1,8 @@
 # Oh-my-zsh and others
 
-- Install zsh and python packages. In case of an error try `sudo apt update -y; sudo apt upgrade -y `.
+- Install packages. In case of an error try `sudo apt update -y; sudo apt upgrade -y `.
 ```
-$ sudo apt install zsh python git curl
+$ sudo apt install zsh python3 git curl tmux pip3
 ```
 - Install [Oh-my-zsh](https://ohmyz.sh/).
 ```
@@ -39,6 +39,19 @@ $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 $ vim +PluginInstall +qall
 ```
+- Install [TPM](https://github.com/tmux-plugins/tpm).
+```
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+- Replace your `.tmux.conf` file with uploaded `tmux.conf`. 
+- - If you are arleady in `tmux`
+```
+$ tmux source ~/.tmux.conf
+```
+- - `Ctrl+b` command will be replaced by `prefix` button. Tap `prefix` + `I` to install package.
+
+**Usefull buttons**: to make horisontal tab: `prefix` + `|`, vertical tab — `prefix`+`-`, swap between tabs — `prefix` + arrows; new window — `prefix` + `c`, swap between windows — `prefix` + `n` (next one), `prefix` + `p` (previous one).
+
 After all tranformations reboot your device.
 
 # Firacode and ligatures in VS Code
