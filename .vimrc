@@ -1,44 +1,50 @@
 " VIM CONFIGURATION
 "------------------
 
-
 " PLUGINS
 "------------------
 
-" --VUNDLE--
-set nocompatible
-filetype off
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-    " Vundle
-    Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-    " Status line
-    Plugin 'vim-airline/vim-airline'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-    " Syntax and autocomplete
-    "Plugin 'jeaye/color_coded'
-    Plugin 'octol/vim-cpp-enhanced-highlight'
+" Brackets
+Plug 'Raimondi/delimitMate'
+Plug 'frazrepo/vim-rainbow'
 
-    "Brackets
-    Plugin 'frazrepo/vim-rainbow'
+" NERDTree
+Plug 'scrooloose/nerdtree'
 
-    " Git
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'airblade/vim-gitgutter'
+" Syntax
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/a.vim'
+Plug 'ervandew/supertab'
 
-    " Files
-    Plugin 'junegunn/fzf'
-    Plugin 'preservim/nerdtree'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
-    
-    " Themes and colors
-    Plugin 'mhartington/oceanic-next'
+" Fzf
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
-call vundle#end()
-filetype plugin indent on
+" Tags
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'majutsushi/tagbar'
 
+" Git
+Plug 'airblade/vim-gitgutter'
+
+" Indents
+Plug 'Yggdroot/indentLine'
+Plug 'jpalardy/spacehi.vim'
+
+call plug#end()
 
 " OTHER
 "------------------
@@ -50,6 +56,12 @@ set dir=~/.vim
 set backup
 set backupdir=/tmp
 set noswapfile
+set autoread
+
+" --FILETYPE--
+filetype on
+filetype plugin on
+filetype indent on
 
 " --UNDO--
 set undofile
@@ -57,14 +69,6 @@ set undodir=~/.vim/undo
 
 " --SYNTAX--
 syntax on
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_posix_standard = 1
-let g:cpp_concepts_highlight = 1
-
-" --AUTO COMPLETE--
-let g:clang_library_path='/Users/itar/.vim/bundle/color_coded/build/clang+llvm-7.0.0-x86_64-apple-darwin/lib'
 
 " --ENCODING--
 set termencoding=utf-8
@@ -78,6 +82,11 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+let g:spacehi_tabcolor="ctermfg=White ctermbg=Red guifg=White guibg=Red"
+let g:spacehi_spacecolor="ctermfg=Black ctermbg=Yellow guifg=Blue guibg=Yellow"
+let g:spacehi_nbspcolor="ctermfg=White ctermbg=Red guifg=White guibg=Red"
+set list
+set listchars=tab:>>,trail:.,nbsp:×
 
 " --FONT--
 set guifont=Fira\ Code:h12
@@ -105,9 +114,6 @@ set ruler
 
 " --COLORS--
 set t_Co=256
-"let g:oceanic_next_terminal_bold = 1
-"let g:oceanic_next_terminal_italic = 1
-"colorscheme OceanicNext
 color slate
 
 " --BRACKETS--
@@ -131,15 +137,47 @@ vnoremap <ScrollWheelDown> j
 vnoremap <ScrollWheelUp> k
 
 " --STATUSLINE--
-let g:airline_theme='oceanicnext'
-set laststatus=2
-
-" --FAST SAVE--
-nmap <F2> :w<CR>
-vmap <F2> <esc>:w<CR>v
-imap <F2> <esc>:w<CR>i
+let g:airline_theme='bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " --NERDTREE--
 " Show the folder tree: ctrl + N
-nmap <C-N> :NERDTreeToggle<CR>
+nmap <F2> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" --SYNTASTIC--
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+    au!
+    au FileType tex let b:syntastic_mode = "passive"
+augroup END
+
+" --BELL--
+set novisualbell
+
+" --DELIMITMATE--
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
+" --COLUMN--
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
+
+" --PATH--
+set path+=/usr/include/x86_64-linux-gnu
+set path+=~/arcadia
+set path+=~/arcadia/contrib/libs/cxxsupp/libcxxrt
+set path+=~/arcadia/contrib/libs/cxxsupp/libcxx/include
+set path+=~/arcadia/devtools/clang_includes
+
+" --TAGS--
+map <F8> :TagBar<CR>
+
